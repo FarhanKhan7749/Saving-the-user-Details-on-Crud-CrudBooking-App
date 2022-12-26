@@ -54,40 +54,44 @@ function addListOfUsers(user) {
 }
 
 //get request using crud crud
-// function showUser1(){
-//     axios.get('https://crudcrud.com/api/373328cd2d974b7d9c8c0727f5be42c5/appointmentData')
-//     .then((res)=>{
-//         addListOfUsers(res);
-//     })
-//     .catch((err)=>{
-//         console.log(err);
-//     });
-// }
+function showUser1(){
+    axios.get('https://crudcrud.com/api/373328cd2d974b7d9c8c0727f5be42c5/appointmentData')
+    .then((res)=>{
+        console.log(res);
+        for(let i=0; i<res.data.length; i++){
+            addListOfUsers(res.data[i]);
+        }
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
+}
 
-//showUser1();
+showUser1();
+
 //
 //
 //
 //get request using crud crud
-function showUser(){
-    axios.get('https://crudcrud.com/api/373328cd2d974b7d9c8c0727f5be42c5/appointmentData')
-    .then((res)=>{
-        let userArray = res.data;
-        userArray.forEach((ele) => {
-            //console.log(ele.name);
-            //console.log(ele.email);
-            let userInfo = {
-                name: ele.name,
-                email: ele.email
-            }
-            addListOfUsers(userInfo);
-        });
-        console.log(res)
-        //console.log(res.data);
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-}
+// function showUser(){
+//     axios.get('https://crudcrud.com/api/373328cd2d974b7d9c8c0727f5be42c5/appointmentData')
+//     .then((res)=>{
+//         let userArray = res.data;
+//         userArray.forEach((ele) => {
+//             //console.log(ele.name);
+//             //console.log(ele.email);
+//             let userInfo = {
+//                 name: ele.name,
+//                 email: ele.email
+//             }
+//             addListOfUsers(userInfo);
+//         });
+//         console.log(res)
+//         //console.log(res.data);
+//     })
+//     .catch((err)=>{
+//         console.log(err);
+//     })
+// }
 
-showUser();
+// showUser();
