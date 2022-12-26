@@ -9,7 +9,7 @@ form.addEventListener("submit", (e) => {
     email: emailInput.value,
   };
   document.querySelector("#my-form").reset(); // to reset the form
-  axios.post('https://crudcrud.com/api/ad8634a3680849ea9d4ceadd1bfa2b3b/appointmentData', user)
+  axios.post('https://crudcrud.com/api/3870062d8a48406ca006c3da4d9f3c2e/appointmentData', user)
   .then((result) => {
       console.log(result);
   }).catch((err) => {
@@ -22,12 +22,12 @@ function addListOfUsers(user) {
   var userId = user._id;
   console.log(userId);
   const parentNode = document.getElementById("listOfUser");
-  const childHTML = `<li id=${user._id}> ${user.name} ${user.email} <button onclick=deleteUser('${user._id}')>delete</button> <button onclick=editUser('${user._id}')>Edit</button></li>`;
+  const childHTML = `<li id=${user._id}> ${user.name} ${user.email} <button onclick=deleteUser('${user._id}')>delete</button> <button onclick=editUser('${user.name}','${user.email}','${user._id}')>Edit</button></li>`;
   console.log(childHTML);
   parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
 function deleteUser(userId) {
-  axios.delete(`https://crudcrud.com/api/ad8634a3680849ea9d4ceadd1bfa2b3b/appointmentData/${userId}`)
+  axios.delete(`https://crudcrud.com/api/3870062d8a48406ca006c3da4d9f3c2e/appointmentData/${userId}`)
   .then((res)=>{
       console.log(res);
       removeUserFromScreen(userId);
@@ -36,6 +36,25 @@ function deleteUser(userId) {
       console.log(err);
   })
 }
+
+function editUser(name,email,userId){
+    document.getElementById('name').value=name;
+    document.getElementById('email').value=email;
+    deleteUser(userId);
+    removeUserFromScreen(userId);
+    // axios.delete("https://crudcrud.com/api/3870062d8a48406ca006c3da4d9f3c2e/appointmentData/"+userId,{
+    //     'name': document.getElementById('name').value,
+    //     'email':document.getElementById('email').value
+    // })
+    // .then((res)=>{
+    //     console.log(res);
+    //     removeUserFromScreen(userId);
+    // })
+    // .catch((err)=>{
+    //     console.log(err);
+    // })
+}
+
 function removeUserFromScreen(userId) {
   const parentNode = document.getElementById("listOfUser");
   const childNodeToBeDeleted = document.getElementById(userId);
@@ -45,7 +64,7 @@ function removeUserFromScreen(userId) {
 }
 //get request using crud crud
 function showUser1(){
-    axios.get('https://crudcrud.com/api/ad8634a3680849ea9d4ceadd1bfa2b3b/appointmentData')
+    axios.get('https://crudcrud.com/api/3870062d8a48406ca006c3da4d9f3c2e/appointmentData')
     .then((res)=>{
         console.log(res);
         for(let i=0; i<res.data.length; i++){
